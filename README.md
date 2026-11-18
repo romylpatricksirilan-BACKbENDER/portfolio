@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Romyl Patrick Sirilan · Portfolio
 
-## Getting Started
+Personal portfolio of Romyl Patrick Sirilan, a fourth-year BS Information Systems student at West Visayas State University focused on web and mobile development.
 
-First, run the development server:
+Built with [Next.js](https://nextjs.org) 16 (App Router, Cache Components), React 19, and TypeScript. No UI framework: the styles are plain CSS in `app/globals.css`.
+
+## What's on the page
+
+- **Hero:** introduction, résumé download, GitHub and LinkedIn links, and a live GitHub contribution graph.
+- **Projects:** TANAW (thesis, with a case study), RentEase, Rebadulla Animal Care, and Hello Expo.
+- **Experience:** education, work, and training as a timeline.
+- **Skills:** languages, frameworks, databases, tools, and strongest areas.
+- **Contact:** email with a copy button, links, and what I'm looking for.
+
+Light and dark themes follow the visitor's system setting, with a toggle in the top bar.
+
+## Run it locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # production build
+npm run lint    # ESLint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Editing the content
 
-## Learn More
+All text lives in [`content/profile.ts`](content/profile.ts): profile, links, projects, timeline, trainings, and skills. Components read from it, so adding a project or a job never needs a component change.
 
-To learn more about Next.js, take a look at the following resources:
+- **Project screenshots:** put a 16:10 image in `public/projects/` and set `image: "/projects/name.png"` on the project. Without one, the card draws an illustrated mock.
+- **Résumé:** replace `public/resume/Romyl-Patrick-Sirilan-Resume.pdf`.
+- **Colors:** the whole palette comes from two values at the top of `app/globals.css`: `--h` (hue, 284 = ultraviolet) and `--c` (chroma).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## GitHub contribution graph
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`lib/github.ts` reads the last year of contributions and caches it for an hour (`'use cache'` with `cacheLife('hours')`).
 
-## Deploy on Vercel
+- **Without a token** it reads the public calendar on the GitHub profile. Contributions to private repositories appear only if **Include private contributions on my profile** is turned on in GitHub → Settings → Public profile.
+- **With a token** (optional), set `GITHUB_TOKEN` (see `.env.example`) to read the same calendar through GitHub's GraphQL API.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If GitHub can't be reached, the graph is left out and the rest of the page still renders.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+Import the repository at [vercel.com/new](https://vercel.com/new) and deploy with the default settings. Optionally set `NEXT_PUBLIC_SITE_URL` to the final address (used for link previews) and `GITHUB_TOKEN`.
