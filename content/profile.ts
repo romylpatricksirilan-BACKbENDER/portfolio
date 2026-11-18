@@ -3,8 +3,14 @@
  * no component needs to change for new projects, jobs, or skills.
  */
 
+import type { StaticImageData } from "next/image";
+import mabuhAiShot from "./screenshots/mabuh-ai.jpg";
+import rebadullaShot from "./screenshots/rebadulla.png";
+import rentEaseShot from "./screenshots/rentease.png";
+import tanawShot from "./screenshots/tanaw.png";
+
 export type Project = {
-  id: "tanaw" | "rentease" | "rebadulla" | "hello-expo";
+  id: "tanaw" | "rentease" | "rebadulla" | "mabuh-ai" | "hello-expo";
   name: string;
   subtitle: string;
   meta: string[];
@@ -19,10 +25,11 @@ export type Project = {
   /** Shown when there is no public link. */
   linkNote?: string;
   /**
-   * Optional screenshot in /public (for example "/projects/tanaw.png", 16:10).
+   * Optional screenshot, statically imported from ./screenshots so its size is known.
+   * Any aspect ratio works: "browser" wraps it in a window bar, "phone" in a device frame.
    * Without one, the card draws an illustrated mock of the app.
    */
-  image?: string;
+  screenshot?: { src: StaticImageData; alt: string; frame: "browser" | "phone" };
 };
 
 export type TimelineItem = {
@@ -89,6 +96,11 @@ export const projects: Project[] = [
     ],
     links: [],
     linkNote: "The source code is private because it is a thesis project.",
+    screenshot: {
+      src: tanawShot,
+      alt: "TANAW sign-in page for the Masagana Hybrid Rice Program, listing seed allocation analytics, municipal coverage mapping, and field technician reports",
+      frame: "browser",
+    },
   },
   {
     id: "rentease",
@@ -99,6 +111,11 @@ export const projects: Project[] = [
       "A rental tracker for students who board away from home. It keeps property and tenant records, rent payments, and lease dates in one place, with a dashboard summary.",
     chips: { caption: "Built with", items: ["JavaScript", "HTML", "CSS", "localStorage"] },
     links: [{ label: "Code", href: `${githubUrl}/rentEASE`, kind: "code" }],
+    screenshot: {
+      src: rentEaseShot,
+      alt: "RentEase landing page with the headline “Manage your rental with ease” and a sign-up button",
+      frame: "browser",
+    },
   },
   {
     id: "rebadulla",
@@ -113,6 +130,26 @@ export const projects: Project[] = [
     },
     links: [],
     linkNote: "The code is not public yet.",
+    screenshot: {
+      src: rebadullaShot,
+      alt: "Rebadulla Animal Care home page with a booking bar for service type, pet name, and appointment date",
+      frame: "browser",
+    },
+  },
+  {
+    id: "mabuh-ai",
+    name: "Mabuh-AI",
+    subtitle: "Student wellbeing check-in app",
+    meta: ["Mobile app", "Android", "2026"],
+    summary:
+      "An Android app for student wellbeing check-ins. Students sign in with Google or their school email, and their check-ins are saved to Supabase. It supports wellbeing and does not replace professional care.",
+    chips: { caption: "Built with", items: ["Tauri", "Vite", "Supabase", "SQLite", "Google Sign-In"] },
+    links: [],
+    screenshot: {
+      src: mabuhAiShot,
+      alt: "Mabuh-AI sign-in screen on Android, with Google sign-in and email and password fields",
+      frame: "phone",
+    },
   },
   {
     id: "hello-expo",
@@ -126,7 +163,7 @@ export const projects: Project[] = [
   },
 ];
 
-export const otherProjects = ["Breast Cancer Classifier", "Mabuh-AI"];
+export const otherProjects = ["Breast Cancer Classifier"];
 
 export const timeline: TimelineItem[] = [
   {

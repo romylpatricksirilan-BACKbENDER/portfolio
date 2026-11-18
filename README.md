@@ -32,7 +32,7 @@ npm run lint    # ESLint
 
 All text lives in [`content/profile.ts`](content/profile.ts): profile, links, projects, timeline, trainings, and skills. Components read from it, so adding a project or a job never needs a component change.
 
-- **Project screenshots:** put a 16:10 image in `public/projects/` and set `image: "/projects/name.png"` on the project. Without one, the card draws an illustrated mock.
+- **Project screenshots:** put the image in `content/screenshots/`, import it at the top of `content/profile.ts`, and set `screenshot: { src, alt, frame }` on the project. Any aspect ratio works: `frame: "browser"` adds a window bar, `frame: "phone"` a device frame. Without one, the card draws an illustrated mock.
 - **Résumé:** replace `public/resume/Romyl-Patrick-Sirilan-Resume.pdf`.
 - **Colors:** the whole palette comes from two values at the top of `app/globals.css`: `--h` (hue, 284 = ultraviolet) and `--c` (chroma).
 
