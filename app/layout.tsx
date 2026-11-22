@@ -43,7 +43,8 @@ export const viewport: Viewport = {
   colorScheme: "light",
   // Lets the page run under the notch in landscape; .wrap and the phone action bar pad by the safe-area insets.
   viewportFit: "cover",
-  themeColor: "#f4fbf9",
+  // The nav is navy on every page, so the browser bar matches it.
+  themeColor: "#0d2470",
 };
 
 // Applies a saved light/dark choice before the first paint, so the page never flashes the wrong theme.

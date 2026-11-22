@@ -6,7 +6,12 @@ export const alt = `${profile.name}, web and mobile developer`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/** The preview card shown when the site link is shared on LinkedIn, Messenger, or elsewhere. */
+const NAVY = "#0d2470";
+const LINE = "#3a5595";
+const MUTED = "#b9c8f5";
+const AMBER = "#ffc247";
+
+/** The preview card shown when the site link is shared: the blueprint sheet, the mark, the name. */
 export default function OpenGraphImage() {
   return new ImageResponse(
     (
@@ -18,8 +23,11 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px 80px",
-          background: "#061310",
-          color: "#eefaf7",
+          backgroundColor: NAVY,
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+          color: "#ffffff",
           fontFamily: "sans-serif",
         }}
       >
@@ -28,24 +36,25 @@ export default function OpenGraphImage() {
             style={{
               width: 72,
               height: 72,
-              borderRadius: 14,
-              background: "#102621",
+              borderRadius: 8,
+              background: "#ffffff",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <svg width="52" height="29" viewBox={SX_VIEWBOX} fill="#17d3b4">
+            <svg width="52" height="29" viewBox={SX_VIEWBOX} fill={NAVY}>
               {SX_PATHS.map((d) => (
                 <path key={d} d={d} />
               ))}
             </svg>
           </div>
-          <div style={{ fontSize: 28, color: "#aac4bd" }}>Portfolio</div>
+          <div style={{ fontSize: 28, color: MUTED }}>Portfolio</div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <div style={{ fontSize: 76, fontWeight: 800, lineHeight: 1.02, letterSpacing: -2 }}>{profile.name}</div>
-          <div style={{ fontSize: 34, color: "#aac4bd" }}>{profile.role}</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+          <div style={{ width: 96, height: 6, background: AMBER }} />
+          <div style={{ fontSize: 80, fontWeight: 800, lineHeight: 1, letterSpacing: -2 }}>{profile.name}</div>
+          <div style={{ display: "flex", fontSize: 34, color: MUTED }}>{profile.role}</div>
         </div>
         <div style={{ display: "flex", gap: 12 }}>
           {["Next.js", "React", "TypeScript", "Supabase", "React Native"].map((t) => (
@@ -54,10 +63,11 @@ export default function OpenGraphImage() {
               style={{
                 display: "flex",
                 padding: "10px 20px",
-                borderRadius: 10,
-                border: "2px solid #2f4f47",
+                borderRadius: 4,
+                border: `2px solid ${LINE}`,
+                background: NAVY,
                 fontSize: 24,
-                color: "#d3ebe4",
+                color: "#dfe7fb",
               }}
             >
               {t}

@@ -145,7 +145,7 @@ export default function TanawCaseStudy() {
           </div>
         </section>
 
-        <section className="cs-end" aria-labelledby="end-title">
+        <section className="cs-end navy" aria-labelledby="end-title">
           <div className="wrap">
             <h2 id="end-title">Want to see more of how it works?</h2>
             <p>

@@ -9,8 +9,8 @@ export default function Experience() {
           <div>
             <h2 id="exp-title">Experience</h2>
             <p className="sec-lede">
-              Studying Information Systems at West Visayas State University, with paid work in verification and
-              customer quality assurance along the way.
+              Paid work in verification and customer quality assurance, and my BS Information Systems course at
+              West Visayas State University.
             </p>
           </div>
           <a className="btn btn-ghost" href={profile.resume.href} target="_blank" rel="noopener">

@@ -38,7 +38,7 @@ export default function CommandPalette({ email, resumeHref, github, linkedin, fa
   const commands = useMemo<Command[]>(
     () => [
       { id: "work", group: "Go to", label: "Work", keywords: "projects", run: () => router.push("/#work") },
-      { id: "tanaw", group: "Go to", label: "TANAW case study", keywords: "thesis", run: () => router.push("/work/tanaw") },
+      { id: "tanaw", group: "Go to", label: "TANAW case study", keywords: "decision support system", run: () => router.push("/work/tanaw") },
       { id: "experience", group: "Go to", label: "Experience", keywords: "education jobs", run: () => router.push("/#experience") },
       { id: "stack", group: "Go to", label: "Stack", keywords: "skills tools", run: () => router.push("/#stack") },
       { id: "contact", group: "Go to", label: "Contact", run: () => router.push("/#contact") },

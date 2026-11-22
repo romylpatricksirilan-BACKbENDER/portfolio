@@ -1,15 +1,19 @@
 import { lookingFor, profile } from "@/content/profile";
 import CopyEmailButton from "./CopyEmailButton";
 import { DownloadIcon, FacebookIcon, GitHubIcon, InstagramIcon, LinkedInIcon, MailIcon } from "./Icons";
+import Reveal from "./Reveal";
 
 export default function Contact() {
   return (
-    <section className="contact" id="contact" aria-labelledby="contact-title">
+    <section className="contact navy" id="contact" aria-labelledby="contact-title">
       <div className="wrap contact-grid">
         <div className="contact-copy">
-          <h2 id="contact-title">Let&apos;s work together.</h2>
+          <Reveal as="h2" id="contact-title">
+            Let&apos;s work <span className="hl">together</span>.
+          </Reveal>
           <p>
-            Hiring an intern, or need a web or mobile app built? Email is the fastest way to reach me.
+            Need a web or mobile app, a dashboard, or a database-backed system? Or hiring a developer? Email is the
+            fastest way to reach me.
           </p>
           <div className="email-box">
             <MailIcon />
@@ -47,7 +51,7 @@ export default function Contact() {
               </div>
             ))}
           </dl>
-          <a className="btn btn-band" href={`mailto:${profile.email}?subject=Internship%20or%20project%20inquiry`}>
+          <a className="btn btn-primary" href={`mailto:${profile.email}?subject=Project%20inquiry`}>
             <MailIcon />
             Email me
           </a>

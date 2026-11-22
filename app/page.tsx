@@ -43,13 +43,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section" id="system" aria-labelledby="system-title">
+        <section className="section navy" id="system" aria-labelledby="system-title">
           <div className="wrap">
             <div className="sec-head">
               <div>
                 <h2 id="system-title">How TANAW works</h2>
                 <p className="sec-lede">
-                  Trace how data moves through my thesis system, from a field entry made offline to a PMED report.
+                  Trace how data moves through TANAW, from a field entry made offline to a PMED report.
                 </p>
               </div>
               <Link className="btn btn-ghost" href="/work/tanaw">

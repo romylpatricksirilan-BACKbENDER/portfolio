@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type KeyboardEvent } from "react";
+import { useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 import type { MapNodeId, SystemMapData } from "@/content/profile";
+import { useRevealOnce } from "@/lib/reveal";
 import { ChevronIcon } from "./Icons";
 
 type Box = { x: number; y: number; w: number; h: number };
@@ -38,6 +39,14 @@ function edgePath(a: MapNodeId, b: MapNodeId) {
   return `M${A.x + A.w / 2} ${A.y}V${B.y + B.h}`;
 }
 
+/**
+ * The map's one scroll moment: people appear first, then the app, then data and services, and each
+ * connector draws in the direction the data flows. Delays in ms.
+ */
+const NODE_DELAY: Record<MapNodeId, number> = { mao: 0, field: 50, fod: 90, pmed: 120, app: 220, db: 380, opt: 420, rep: 460 };
+const edgeDelay = (a: MapNodeId, b: MapNodeId) => (b === "app" ? 150 + NODE_DELAY[a] : a === "app" ? 330 + NODE_DELAY[b] - 380 : 520);
+const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+
 const GROUPS: { label: string; ids: MapNodeId[] }[] = [
   { label: "People", ids: ["mao", "field", "fod", "pmed"] },
   { label: "App", ids: ["app"] },
@@ -49,6 +58,8 @@ export default function SystemMap({ map, title }: { map: SystemMapData; title: s
   const [pinned, setPinned] = useState<MapNodeId | null>(null);
   const [mobileOpen, setMobileOpen] = useState<MapNodeId | null>(null);
   const active = hover ?? pinned;
+  const boxRef = useRef<HTMLDivElement>(null);
+  const reveal = useRevealOnce(boxRef, 0.4);
 
   const neighbours = (id: MapNodeId) =>
     map.edges.flatMap(([a, b]) => (a === id ? [b] : b === id ? [a] : []));
@@ -68,9 +79,10 @@ export default function SystemMap({ map, title }: { map: SystemMapData; title: s
   return (
     <div className="sysmap">
       <div className="map-wide">
-        <div className="map-box">
+        <div className="map-box" ref={boxRef}>
           <svg
             className={`map${active ? " has-on" : ""}`}
+            data-reveal={reveal === "idle" ? undefined : reveal}
             viewBox="0 0 760 376"
             role="group"
             aria-label={`${title}. Each part is a button that explains what it does.`}
@@ -89,6 +101,7 @@ export default function SystemMap({ map, title }: { map: SystemMapData; title: s
                 key={`${a}-${b}`}
                 className={`edge${active && (a === active || b === active) ? " on" : ""}`}
                 d={edgePath(a, b)}
+                style={delay(edgeDelay(a, b))}
               />
             ))}
             {(Object.keys(POS) as MapNodeId[]).map((id) => {
@@ -103,6 +116,7 @@ export default function SystemMap({ map, title }: { map: SystemMapData; title: s
                   tabIndex={0}
                   aria-label={n.title}
                   aria-pressed={pinned === id}
+                  style={delay(NODE_DELAY[id])}
                   onPointerEnter={(e) => {
                     if (e.pointerType === "mouse") setHover(id);
                   }}
@@ -111,7 +125,7 @@ export default function SystemMap({ map, title }: { map: SystemMapData; title: s
                   onClick={() => togglePin(id)}
                   onKeyDown={(e) => onNodeKey(e, id)}
                 >
-                  <rect x={p.x + 0.75} y={p.y + 0.75} width={p.w - 1.5} height={p.h - 1.5} rx={isApp ? 8 : 6} />
+                  <rect x={p.x + 0.75} y={p.y + 0.75} width={p.w - 1.5} height={p.h - 1.5} rx={isApp ? 4 : 3} />
                   <text className="k" x={p.x + 14} y={p.y + (isApp ? 26 : 20)}>
                     {n.kind.toUpperCase()}
                   </text>

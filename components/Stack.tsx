@@ -18,8 +18,8 @@ export default function Stack({ groups, competencies }: { groups: StackGroup[]; 
           <div>
             <h2 id="stack-title">Stack</h2>
             <p className="sec-lede">
-              Languages, frameworks, and tools from my coursework, thesis, and projects. A number shows how many
-              projects on this page use it; hover or tap to see which.
+              The languages, frameworks, and tools I build with. A number shows how many projects on this page use
+              it; hover or tap to see which.
             </p>
           </div>
         </div>

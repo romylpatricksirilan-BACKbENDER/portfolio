@@ -14,6 +14,7 @@ export default function Toasts() {
           background: "var(--surface)",
           color: "var(--fg)",
           border: "1px solid var(--line)",
+          borderRadius: "var(--r-md)",
           fontFamily: "var(--font-body)",
           boxShadow: "var(--shadow)",
         },

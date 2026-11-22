@@ -33,6 +33,8 @@ export default function Nav({
 }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // On the home page the nav is clear while it sits over the navy hero, and solid once the hero has gone by.
+  const [overHero, setOverHero] = useState(spy);
   const [seen, setSeen] = useState<SectionId | null>(null);
   const current = spy ? seen : active;
   const mac = useSyncExternalStore(noop, isMac, () => false);
@@ -40,7 +42,11 @@ export default function Nav({
   const barRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const hero = spy ? document.getElementById("top") : null;
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      setOverHero(!!hero && window.scrollY < hero.offsetHeight - 72);
+    };
     const frame = requestAnimationFrame(onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     const onKey = (e: KeyboardEvent) => {
@@ -52,7 +58,7 @@ export default function Nav({
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("keydown", onKey);
     };
-  }, []);
+  }, [spy]);
 
   useEffect(() => {
     if (!spy) return;
@@ -93,7 +99,7 @@ export default function Nav({
   }, [current]);
 
   return (
-    <header className={`nav${scrolled ? " scrolled" : ""}${open ? " open" : ""}`}>
+    <header className={`nav navy${overHero && !open ? " clear" : scrolled ? " scrolled" : ""}${open ? " open" : ""}`}>
       <div className="wrap nav-inner">
         <Link className="brand" href="/#top">
           <span className="mark" aria-hidden="true">
@@ -133,7 +139,7 @@ export default function Nav({
             <MoonIcon className="ic-moon" />
             <SunIcon className="ic-sun" />
           </button>
-          <a className="btn btn-primary btn-sm resume-nav" href={resumeHref} target="_blank" rel="noopener" aria-label="Résumé (PDF)">
+          <a className="btn btn-ghost btn-sm resume-nav" href={resumeHref} target="_blank" rel="noopener" aria-label="Résumé (PDF)">
             <DownloadIcon />
             <span className="resume-label">Résumé</span>
           </a>
