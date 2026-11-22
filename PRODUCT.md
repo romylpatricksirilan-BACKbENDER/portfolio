@@ -8,14 +8,16 @@ web
 
 ## Users
 
-Two primary audiences, weighted equally. Both are deciding whether to interview Romyl for an **on-site web or mobile development internship in Iloilo**.
+Two audiences the site serves at once:
 
-- **Recruiters and HR screeners** at Iloilo-area companies. Often non-technical. They skim for well under a minute and decide whether to pass the candidate to the team.
-- **Engineers and tech leads** at the same companies. They read the TANAW case study, open GitHub, download the résumé, and judge how deep the technical skills go.
+1. **Hiring, for an on-site web or mobile development internship in Iloilo.**
+   - **Recruiters and HR screeners** at Iloilo-area companies. Often non-technical. They skim for well under a minute and decide whether to pass the candidate to the team.
+   - **Engineers and tech leads** at the same companies. They read the TANAW case study, open GitHub, download the résumé, and judge how deep the technical skills go.
+2. **Prospective clients** (added Nov 2026): people or organizations who need a web or mobile app, a dashboard, or a database-backed system built. They check past work to judge fit and quality, then send an inquiry. Rates, packages, and service terms are not decided and must not be invented.
 
 ## Product Purpose
 
-A single-page personal portfolio for Romyl Patrick Sirilan, a fourth-year BS Information Systems student at West Visayas State University. It exists to turn a visit into an internship interview. Success is a recruiter forwarding the profile, or an engineer reaching out by email or LinkedIn.
+A personal portfolio for Romyl Patrick Sirilan, a fourth-year BS Information Systems student at West Visayas State University. It exists to turn a visit into an internship interview or a client inquiry. Success is a recruiter forwarding the profile, an engineer reaching out, or a prospective client emailing about a project.
 
 ## Positioning
 
@@ -46,7 +48,12 @@ Web and mobile range (Next.js and React, React Native, Expo, Tauri) is a real ca
 ## Brand Commitments
 
 - Name: **Romyl Patrick Sirilan**. Initials: **RS**.
-- A personal brand, **SYREX**, exists as AI-generated raster sheets in `Syrex branding/`: an "SX" monogram with a wordmark, plus two palettes (the earlier violet-blue "Neon" and the later "Obsidian Mint"). **Open decision:** which version is final, and whether SYREX replaces the site's current look. Its mockup copy (client counts, awards, pricing, client logos, "UI/UX Designer", "Founder") is placeholder and is not product truth.
+- Personal brand **SYREX** (decided Nov 2026):
+  - **Palette:** Obsidian Mint, used across the site in dark and light modes. The violet-blue version is retired.
+  - **Symbol:** the SX mark, redrawn as vector (`components/SyrexMark.tsx`; exports in `Syrex branding/svg/`). The original raster sheets in `Syrex branding/` are reference only.
+  - **Name first:** Romyl's name stays the headline; SYREX is the mark, not a company name.
+  - **Wordmark:** SYREX redrawn as vector on the symbol's rules (one stroke weight, 45° cuts), with stacked and horizontal lockups, in `Syrex branding/svg/`.
+  - The brand sheets' mockup copy (client counts, awards, pricing, client logos, "UI/UX Designer", "Founder") is placeholder and is not product truth.
 
 ## Evidence on Hand
 
@@ -64,4 +71,4 @@ Web and mobile range (Next.js and React, React Native, Expo, Tauri) is a real ca
 2. **Two reading speeds.** The first screen answers who, what, for which internship, and where for a 30-second skim. Depth (case study, code, timeline) sits one step away for the engineer.
 3. **Lead with systems, not flash.** The differentiator is real data, roles, and workflows, with TANAW as the centerpiece.
 4. **Work history is evidence.** The verification and QA roles show reliability and process discipline. Present them that way, not as filler.
-5. **Local and reachable.** Make the Iloilo location and the on-site availability unmistakable, and keep contact one action away.
+5. **Local and reachable.** Make the Iloilo location, on-site internship availability, and openness to client projects unmistakable, and keep contact one action away.

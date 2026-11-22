@@ -6,13 +6,16 @@ Built with [Next.js](https://nextjs.org) 16 (App Router, Cache Components), Reac
 
 ## What's on the page
 
-- **Hero:** introduction, résumé download, GitHub and LinkedIn links, and a live GitHub contribution graph.
-- **Projects:** TANAW (thesis, with a case study), RentEase, Rebadulla Animal Care, and Hello Expo.
-- **Experience:** education, work, and training as a timeline.
-- **Skills:** languages, frameworks, databases, tools, and strongest areas.
+- **Intro:** name, what I do, on-site availability in Iloilo, Copy email, résumé, GitHub and LinkedIn.
+- **Selected work:** a project browser. Wide screens show a list beside a live preview; phones get an accordion.
+- **How TANAW works:** an interactive system map. Hover, tap, or tab to a part to see what it does and what it connects to.
+- **Experience:** education, work, and training as dated rows.
+- **Stack:** skills in four groups. Each one used on this page shows which projects used it.
+- **On GitHub:** the last year of contributions.
 - **Contact:** email with a copy button, links, and what I'm looking for.
+- **[/work/tanaw](app/work/tanaw/page.tsx):** the TANAW case study: roles, system map, key flows, and screens.
 
-Light and dark themes follow the visitor's system setting, with a toggle in the top bar.
+Also: a command palette (Ctrl K or ⌘K), toasts for copy feedback (Sonner), an Email · Résumé bar on phones once the intro scrolls away, and a screenshot that morphs from the home page into the case study (React view transitions). The site opens in light mode; the toggle in the top bar switches to dark and remembers the choice. Motion follows Emil Kowalski's rules: strong ease-out curves, UI motion under 300 ms, nothing animated on keyboard actions, and reduced motion respected.
 
 ## Run it locally
 
@@ -30,11 +33,14 @@ npm run lint    # ESLint
 
 ## Editing the content
 
-All text lives in [`content/profile.ts`](content/profile.ts): profile, links, projects, timeline, trainings, and skills. Components read from it, so adding a project or a job never needs a component change.
+All text lives in [`content/profile.ts`](content/profile.ts): profile, links, projects, the TANAW case study and system map, timeline, trainings, and skills. Components read from it, so adding a project or a job never needs a component change.
 
-- **Project screenshots:** put the image in `content/screenshots/`, import it at the top of `content/profile.ts`, and set `screenshot: { src, alt, frame }` on the project. Any aspect ratio works: `frame: "browser"` adds a window bar, `frame: "phone"` a device frame. Without one, the card draws an illustrated mock.
+- **Project screenshots:** put the image in `content/screenshots/`, import it at the top of `content/profile.ts`, and set `screenshot: { src, alt, frame }` on the project. Any aspect ratio works: `frame: "browser"` adds a window bar, `frame: "phone"` a device frame. Without one, the preview shows the text only. Add a `caption` when the screenshot needs context, such as example data.
+- **Headshot:** optional. Follow the comment above `photo` in `content/profile.ts`; it appears in the intro.
+- **Skills "used in":** counted from each project's "Built with" chips, so a skill links to a project only when the project lists it.
 - **Résumé:** replace `public/resume/Romyl-Patrick-Sirilan-Resume.pdf`.
-- **Colors:** the whole palette comes from two values at the top of `app/globals.css`: `--h` (hue, 284 = ultraviolet) and `--c` (chroma).
+- **Colors:** the palette is Obsidian Mint from the SYREX brand. Every token in `app/globals.css` is built on one hue, `--h` (177 = mint). Dark mode uses the brand sheet's own colors. Light mode keeps the bright mint for buttons and switches to a deep mint wherever mint is used as text.
+- **Logo:** the SX symbol lives in `components/SyrexMark.tsx` as SVG paths. The favicon (`app/icon.svg`) and the link preview image (`app/opengraph-image.tsx`) use the same paths.
 
 ## GitHub contribution graph
 

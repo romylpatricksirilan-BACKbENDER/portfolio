@@ -27,6 +27,26 @@ export function LinkedInIcon({ className }: IconProps) {
   );
 }
 
+export function FacebookIcon({ className }: IconProps) {
+  return (
+    <svg className={`ic fill ${className ?? ""}`} viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+      <path d="M16 8.05A8 8 0 1 0 6.75 15.95V10.3H4.72V8.05h2.03V6.3c0-2 1.2-3.12 3.03-3.12.88 0 1.8.16 1.8.16v1.97h-1.01c-1 0-1.31.62-1.31 1.26v1.48h2.22l-.35 2.25H9.26v5.65A8 8 0 0 0 16 8.05z" />
+    </svg>
+  );
+}
+
+/** A rounded square, the lens ring, and the flash dot, filled to match the other brand icons. */
+export function InstagramIcon({ className }: IconProps) {
+  return (
+    <svg className={`ic fill ${className ?? ""}`} viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+      <path
+        fillRule="evenodd"
+        d="M4.5 0h7A4.5 4.5 0 0 1 16 4.5v7a4.5 4.5 0 0 1-4.5 4.5h-7A4.5 4.5 0 0 1 0 11.5v-7A4.5 4.5 0 0 1 4.5 0zM4.5 1.5A3 3 0 0 0 1.5 4.5v7a3 3 0 0 0 3 3h7a3 3 0 0 0 3-3v-7a3 3 0 0 0-3-3h-7zM8 4.1a3.9 3.9 0 1 0 0 7.8a3.9 3.9 0 1 0 0-7.8zM8 5.55a2.45 2.45 0 1 1 0 4.9a2.45 2.45 0 1 1 0-4.9zM12.25 2.85a0.95 0.95 0 1 0 0 1.9a0.95 0.95 0 1 0 0-1.9z"
+      />
+    </svg>
+  );
+}
+
 export const ArrowIcon = ({ className }: IconProps) => (
   <Stroke className={className}>
     <path d="M7 17 17 7M8 7h9v9" />
@@ -75,6 +95,37 @@ export const MailIcon = ({ className }: IconProps) => (
   <Stroke className={className}>
     <rect x="3" y="5" width="18" height="14" rx="2" />
     <path d="m3 7 9 6 9-6" />
+  </Stroke>
+);
+
+export const ChevronIcon = ({ className }: IconProps) => (
+  <Stroke className={className}>
+    <path d="m6 9 6 6 6-6" />
+  </Stroke>
+);
+
+export const SearchIcon = ({ className }: IconProps) => (
+  <Stroke className={className}>
+    <circle cx="11" cy="11" r="7" />
+    <path d="m20 20-3.5-3.5" />
+  </Stroke>
+);
+
+export const ArrowRightIcon = ({ className }: IconProps) => (
+  <Stroke className={className}>
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </Stroke>
+);
+
+export const ArrowDownIcon = ({ className }: IconProps) => (
+  <Stroke className={className}>
+    <path d="M12 5v14M6 13l6 6 6-6" />
+  </Stroke>
+);
+
+export const ArrowLeftIcon = ({ className }: IconProps) => (
+  <Stroke className={className}>
+    <path d="M19 12H5M11 6l-6 6 6 6" />
   </Stroke>
 );
 

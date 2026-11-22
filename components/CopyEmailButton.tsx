@@ -1,53 +1,46 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
+import { copyText } from "@/lib/theme";
 import { CopyIcon } from "./Icons";
 
-/** Copies the address; where the clipboard is blocked, selects it so the visitor can copy it. */
-export default function CopyEmailButton({ email, targetId }: { email: string; targetId: string }) {
-  const [state, setState] = useState<"idle" | "copied" | "selected">("idle");
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => () => {
-    if (timer.current) clearTimeout(timer.current);
-  }, []);
-
-  function reset() {
-    if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => setState("idle"), 2000);
-  }
-
-  function selectAddress() {
-    const el = document.getElementById(targetId);
-    if (!el) return;
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    const sel = window.getSelection();
-    sel?.removeAllRanges();
-    sel?.addRange(range);
-    setState("selected");
-    reset();
-  }
-
+/**
+ * Copies the address and confirms with a toast. Where the clipboard is blocked, selects the
+ * address on the page (when targetId points at it) so the visitor can copy it themselves.
+ */
+export default function CopyEmailButton({
+  email,
+  targetId,
+  className = "btn btn-primary",
+  label = "Copy email",
+}: {
+  email: string;
+  targetId?: string;
+  className?: string;
+  label?: string;
+}) {
   async function copy() {
-    try {
-      await navigator.clipboard.writeText(email);
-      setState("copied");
-      reset();
-    } catch {
-      selectAddress();
+    if (await copyText(email)) {
+      toast.success("Email address copied", { description: email });
+      return;
+    }
+    const el = targetId ? document.getElementById(targetId) : null;
+    if (el) {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel?.removeAllRanges();
+      sel?.addRange(range);
+      toast("Address selected", { description: "Press Ctrl+C to copy it." });
+    } else {
+      toast("Copy didn't work here", { description: email });
     }
   }
 
   return (
-    <>
-      <button className="btn btn-band btn-sm" type="button" onClick={copy}>
-        <CopyIcon />
-        {state === "copied" ? "Copied" : "Copy"}
-      </button>
-      <span className="sr-only" role="status">
-        {state === "copied" ? "Email address copied" : state === "selected" ? "Email address selected, press Control C to copy" : ""}
-      </span>
-    </>
+    <button className={className} type="button" onClick={copy}>
+      <CopyIcon />
+      {label}
+    </button>
   );
 }

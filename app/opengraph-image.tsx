@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SX_PATHS, SX_VIEWBOX } from "@/components/SyrexMark";
 import { profile } from "@/content/profile";
 
 export const alt = `${profile.name}, web and mobile developer`;
@@ -17,8 +18,8 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px 80px",
-          background: "#1c1340",
-          color: "#f6f4ff",
+          background: "#061310",
+          color: "#eefaf7",
           fontFamily: "sans-serif",
         }}
       >
@@ -27,22 +28,24 @@ export default function OpenGraphImage() {
             style={{
               width: 72,
               height: 72,
-              borderRadius: 18,
-              background: "#6a4cf5",
+              borderRadius: 14,
+              background: "#102621",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 32,
-              fontWeight: 700,
             }}
           >
-            {profile.initials}
+            <svg width="52" height="29" viewBox={SX_VIEWBOX} fill="#17d3b4">
+              {SX_PATHS.map((d) => (
+                <path key={d} d={d} />
+              ))}
+            </svg>
           </div>
-          <div style={{ fontSize: 28, color: "#c9bfff" }}>Portfolio</div>
+          <div style={{ fontSize: 28, color: "#aac4bd" }}>Portfolio</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div style={{ fontSize: 76, fontWeight: 800, lineHeight: 1.02, letterSpacing: -2 }}>{profile.name}</div>
-          <div style={{ fontSize: 34, color: "#c9bfff" }}>{profile.role}</div>
+          <div style={{ fontSize: 34, color: "#aac4bd" }}>{profile.role}</div>
         </div>
         <div style={{ display: "flex", gap: 12 }}>
           {["Next.js", "React", "TypeScript", "Supabase", "React Native"].map((t) => (
@@ -51,10 +54,10 @@ export default function OpenGraphImage() {
               style={{
                 display: "flex",
                 padding: "10px 20px",
-                borderRadius: 999,
-                border: "2px solid #4a3a9a",
+                borderRadius: 10,
+                border: "2px solid #2f4f47",
                 fontSize: 24,
-                color: "#e4ddff",
+                color: "#d3ebe4",
               }}
             >
               {t}

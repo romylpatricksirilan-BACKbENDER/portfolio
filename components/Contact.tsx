@@ -1,44 +1,39 @@
 import { lookingFor, profile } from "@/content/profile";
 import CopyEmailButton from "./CopyEmailButton";
-import { DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon } from "./Icons";
+import { DownloadIcon, FacebookIcon, GitHubIcon, InstagramIcon, LinkedInIcon, MailIcon } from "./Icons";
 
 export default function Contact() {
   return (
     <section className="contact" id="contact" aria-labelledby="contact-title">
       <div className="wrap contact-grid">
         <div className="contact-copy">
-          <p className="eyebrow">Contact</p>
           <h2 id="contact-title">Let&apos;s work together.</h2>
-          <p>I&apos;m looking for a web or mobile development internship. Email is the fastest way to reach me.</p>
+          <p>
+            Hiring an intern, or need a web or mobile app built? Email is the fastest way to reach me.
+          </p>
           <div className="email-box">
             <MailIcon />
             <a id="email-address" className="email" href={`mailto:${profile.email}`}>
               {profile.email}
             </a>
-            <CopyEmailButton email={profile.email} targetId="email-address" />
+            <CopyEmailButton email={profile.email} targetId="email-address" className="btn btn-band btn-sm" label="Copy" />
           </div>
           <ul className="contact-links">
-            <li>
-              <a href={profile.github.url} target="_blank" rel="noopener">
-                <GitHubIcon />
-                GitHub
-                <span className="handle">{profile.github.label}</span>
-              </a>
-            </li>
-            <li>
-              <a href={profile.linkedin.url} target="_blank" rel="noopener">
-                <LinkedInIcon />
-                LinkedIn
-                <span className="handle">{profile.linkedin.label}</span>
-              </a>
-            </li>
-            <li>
-              <a href={profile.resume.href} target="_blank" rel="noopener">
-                <DownloadIcon />
-                Résumé
-                <span className="handle">{profile.resume.label}</span>
-              </a>
-            </li>
+            {[
+              { name: "GitHub", icon: <GitHubIcon />, ...profile.github },
+              { name: "LinkedIn", icon: <LinkedInIcon />, ...profile.linkedin },
+              { name: "Facebook", icon: <FacebookIcon />, ...profile.facebook },
+              { name: "Instagram", icon: <InstagramIcon />, ...profile.instagram },
+              { name: "Résumé", icon: <DownloadIcon />, url: profile.resume.href, label: profile.resume.label },
+            ].map((l) => (
+              <li key={l.name}>
+                <a href={l.url} target="_blank" rel="noopener">
+                  {l.icon}
+                  {l.name}
+                  <span className="handle">{l.label}</span>
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -52,7 +47,7 @@ export default function Contact() {
               </div>
             ))}
           </dl>
-          <a className="btn btn-band" href={`mailto:${profile.email}?subject=Internship%20opportunity`}>
+          <a className="btn btn-band" href={`mailto:${profile.email}?subject=Internship%20or%20project%20inquiry`}>
             <MailIcon />
             Email me
           </a>

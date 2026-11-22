@@ -1,21 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
+import CommandPalette from "@/components/CommandPalette";
+import Toasts from "@/components/Toasts";
 import { profile } from "@/content/profile";
 import "./globals.css";
 
-const display = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  axes: ["opsz"],
-});
-
-const body = Instrument_Sans({
-  variable: "--font-instrument",
+/** Geist for headings and text (the same family as the TANAW dashboard), Geist Mono for data. */
+const sans = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
 });
 
-const mono = JetBrains_Mono({
-  variable: "--font-jetbrains",
+const mono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -43,7 +40,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  colorScheme: "light dark",
+  colorScheme: "light",
+  // Lets the page run under the notch in landscape; .wrap and the phone action bar pad by the safe-area insets.
+  viewportFit: "cover",
+  themeColor: "#f4fbf9",
 };
 
 // Applies a saved light/dark choice before the first paint, so the page never flashes the wrong theme.
@@ -51,11 +51,22 @@ const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CommandPalette
+          email={profile.email}
+          resumeHref={profile.resume.href}
+          github={{ url: profile.github.url, label: profile.github.label }}
+          linkedin={{ url: profile.linkedin.url, label: profile.linkedin.label }}
+          facebook={profile.facebook}
+          instagram={profile.instagram}
+        />
+        <Toasts />
+      </body>
     </html>
   );
 }
